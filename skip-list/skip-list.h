@@ -16,7 +16,6 @@ public:
 
 
 class SkipList {
-    public:
     int MAXLVL;
     int level;
     float P; // fraction of nodes compered to the previous level
