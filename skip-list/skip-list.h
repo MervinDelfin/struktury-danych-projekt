@@ -1,5 +1,6 @@
 #pragma once
 using namespace std;
+#include <iostream>
 
 #ifndef SKIP_LIST_H
 #define SKIP_LIST_H
