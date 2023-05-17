@@ -1,13 +1,14 @@
 #include <iostream>
 #include "skip-list.h"
+#include <vector>
 
 using namespace std;
 
 
-Node::Node(int key, int level) {
+Node::Node(int key=0, int level=0) {
     this->key = key;
-    forward = new Node *[level + 1];
-    memset(forward, 0, sizeof(Node *) * (level + 1));
+    forward = new Node * [level + 1];
+    memset(forward, 0, sizeof(Node*) * (level + 1));
 };
 
 ostream& operator<<(ostream& os, const Node& node) {
@@ -40,10 +41,10 @@ int SkipList::randomLevel() {
 
 
 bool SkipList::insertElement(int key) {
-    Node *current = header;
-
-    Node *update[MAXLVL + 1];
-    memset(update, 0, sizeof(Node *) * (MAXLVL + 1));
+    Node* current = header;
+    vector<Node*> update(MAXLVL + 1);
+    //Node* update[MAXLVL + 1];
+    //memset(update, 0, sizeof(Node*) * (MAXLVL + 1));
 
     for (int i = level; i >= 0; i--) {
         while (current->forward[i] != NULL && current->forward[i]->key < key) {
@@ -65,7 +66,7 @@ bool SkipList::insertElement(int key) {
             level = rlevel;
         }
 
-        Node *n = new Node(key, level);
+        Node* n = new Node(key, level);
 
         for (int i = 0; i <= rlevel; i++)
         {
@@ -79,10 +80,10 @@ bool SkipList::insertElement(int key) {
 
 
 bool SkipList::deleteElement(int key) {
-    Node *current = header;
+    Node* current = header;
 
-    Node *update[MAXLVL + 1];
-    memset(update, 0, sizeof(Node *) * (MAXLVL + 1));
+    vector<Node*> update(MAXLVL + 1);
+    //memset(update, 0, sizeof(Node*) * (MAXLVL + 1));
 
     for (int i = level; i >= 0; i--) {
         while (current->forward[i] != NULL && current->forward[i]->key < key)
@@ -111,11 +112,11 @@ bool SkipList::deleteElement(int key) {
 };
 
 Node* SkipList::searchElement(int key) {
-    Node *current = header;
+    Node* current = header;
 
     for (int i = level; i >= 0; i--) {
         while (current->forward[i] &&
-               current->forward[i]->key < key)
+            current->forward[i]->key < key)
             current = current->forward[i];
     }
 
@@ -128,18 +129,18 @@ Node* SkipList::searchElement(int key) {
 };
 
 Node* SkipList::nextNode(int key) {
-    Node *current = searchElement(key);
+    Node* current = searchElement(key);
     if (current)
         return current->forward[0];
     return NULL;
 };
 
 Node* SkipList::prevNode(int key) {
-    Node *current = header;
+    Node* current = header;
 
     for (int i = level; i >= 0; i--) {
         while (current->forward[i] &&
-               current->forward[i]->key < key)
+            current->forward[i]->key < key)
             current = current->forward[i];
     }
 
@@ -151,10 +152,10 @@ Node* SkipList::prevNode(int key) {
 
 void SkipList::displayList() {
     cout << "\n*****Skip List*****"
-         << "\n";
+        << "\n";
     for (int i = 0; i <= level; i++)
     {
-        Node *node = header->forward[i];
+        Node* node = header->forward[i];
         cout << "Level " << i << ": ";
         while (node != NULL)
         {
@@ -165,32 +166,32 @@ void SkipList::displayList() {
     }
 };
 
-int main() {
-    srand((unsigned)time(0));
-
-    SkipList skiplist(3, 0.5);
-
-    skiplist.insertElement(3);
-    skiplist.insertElement(6);
-    skiplist.insertElement(7);
-    skiplist.insertElement(9);
-    skiplist.insertElement(12);
-    skiplist.insertElement(19);
-    skiplist.insertElement(17);
-    skiplist.insertElement(26);
-    skiplist.insertElement(21);
-    skiplist.insertElement(25);
-    skiplist.displayList();
-
-
-    cout << *skiplist.searchElement(19) << endl;
-
-    skiplist.deleteElement(19);
-
-    cout << skiplist.searchElement(19) << endl;
-
-    skiplist.displayList();
-
-    cout << skiplist.nextNode(26) << endl;
-    cout << *skiplist.prevNode(3) << endl;
-}
+//int main() {
+//    srand((unsigned)time(0));
+//
+//    SkipList skiplist(3, 0.5);
+//
+//    skiplist.insertElement(3);
+//    skiplist.insertElement(6);
+//    skiplist.insertElement(7);
+//    skiplist.insertElement(9);
+//    skiplist.insertElement(12);
+//    skiplist.insertElement(19);
+//    skiplist.insertElement(17);
+//    skiplist.insertElement(26);
+//    skiplist.insertElement(21);
+//    skiplist.insertElement(25);
+//    skiplist.displayList();
+//
+//
+//    cout << *skiplist.searchElement(19) << endl;
+//
+//    skiplist.deleteElement(19);
+//
+//    cout << skiplist.searchElement(19) << endl;
+//
+//    skiplist.displayList();
+//
+//    cout << skiplist.nextNode(26) << endl;
+//    cout << *skiplist.prevNode(3) << endl;
+//}
