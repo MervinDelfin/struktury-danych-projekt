@@ -3,8 +3,8 @@
 #include<cstdlib>
 
 
-#include "C:\Users\Akip\Documents\struktury-danych-projekt\skip-list\skip-list.h"
-#include "C:\Users\Akip\Documents\struktury-danych-projekt\self-organizing-list\SelfSortList.h"
+#include ".\skip-list\skip-list.h"
+#include ".\self-organizing-list\SelfSortList.h"
 
 
 int main()
@@ -66,10 +66,10 @@ int main()
 		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 		searchSkipArray[i] = duration;
 
-		auto start = std::chrono::high_resolution_clock::now();
+		start = std::chrono::high_resolution_clock::now();
 		sfl.Search(randomArray[i]);
-		auto stop = std::chrono::high_resolution_clock::now();
-		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+		stop = std::chrono::high_resolution_clock::now();
+		duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 		searchSkipArray[i] = duration;
 
 	}
