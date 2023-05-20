@@ -22,6 +22,7 @@ public:
 	void Insert(int);
 	bool Search(int);
 	void Print();
+	void SaveToFile(std::string file);
 	void Remove(int);
 };
 

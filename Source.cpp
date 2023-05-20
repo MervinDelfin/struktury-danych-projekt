@@ -9,7 +9,11 @@
 #include ".\self-organizing-list\SelfSortList.h"
 
 using std::vector;
-
+void SaveData(SkipList skp, SelfSortList sfl)
+{
+	skp.saveList("skiplist");
+	sfl.SaveToFile("selfsortinglist");
+}
 void Measure(vector<int> randomArray, SkipList skp, SelfSortList sfl)
 {
 
@@ -29,7 +33,7 @@ void Measure(vector<int> randomArray, SkipList skp, SelfSortList sfl)
 	}
 	auto stopsfl = std::chrono::high_resolution_clock::now();
 	auto createSflDuration = std::chrono::duration_cast<std::chrono::microseconds>(stopsfl - startsfl);
-
+	SaveData(skp, sfl);
 
 	vector<std::chrono::microseconds> searchSkipArray;
 	vector<std::chrono::microseconds> searchSflArray;
@@ -57,6 +61,7 @@ void Measure(vector<int> randomArray, SkipList skp, SelfSortList sfl)
 
 	//measure time of deleting given elements from the structure
 
+	
 	for (int i = randomArray.size() - 1; i >= randomArray.size() / 50; i -= randomArray.size() / 50)
 	{
 		auto start = std::chrono::high_resolution_clock::now();
@@ -81,27 +86,27 @@ void Measure(vector<int> randomArray, SkipList skp, SelfSortList sfl)
 		<< createSkpDuration.count() << "\nself sorting list:\t" << createSflDuration.count() << "\n=================== czasy wyszukiwania elementow\nskiplista:\n";
 	for (int i = 0; i < searchSkipArray.size(); i++)
 	{
-		Results <<i<<"):\t" << searchSkipArray[i].count()<<"\n";
+		Results << randomArray[i * randomArray.size() / 50] <<"):\t" << searchSkipArray[i].count()<<"\n";
 
 	}
 	Results << "self sorting lista:\n";
 	for (int i = 0; i < searchSkipArray.size(); i++)
 	{
-		Results << i << "):\t" << searchSflArray[i].count() << "\n";
+		Results << randomArray[i * randomArray.size() / 50] << "):\t" << searchSflArray[i].count() << "\n";
 
 	}
 
 	Results << "=============czas usuwania elementow\nskiplista:\n";
 	for (int i = 0; i < skpDeleteTime.size(); i++)
 	{
-		Results << i << "):\t" << skpDeleteTime[i].count() << "\n";
+		Results << randomArray[i * randomArray.size() / 50] << "):\t" << skpDeleteTime[i].count() << "\n";
 
 	}
 
 	Results << "self sorting lista:\n";
 	for (int i = 0; i < sflDeleteTime.size(); i++)
 	{
-		Results << i << "):\t" << skpDeleteTime[i].count() << "\n";
+		Results << randomArray[i * randomArray.size() / 50] << "):\t" << sflDeleteTime[i].count() << "\n";
 
 	}
 
@@ -115,11 +120,11 @@ int main()
 	int n2 = 100000;
 	int n3 = 10000;
 
-	srand((unsigned)time(NULL));
+	//srand((unsigned)time(NULL));
 	vector<int> randomArray1, randomArray2, randomArray3;
 	for (int i = 0; i < n1; i++)
 	{
-		randomArray1.push_back( rand()%100);
+		randomArray1.push_back( rand());
 		if (i < n2)
 		{
 			randomArray2.push_back(randomArray1[i]);
@@ -128,7 +133,12 @@ int main()
 				randomArray3.push_back(randomArray1[i]);
 		}
 	}
+	std::ofstream Data("data.txt");
+	for (int i = 0; i < randomArray1.size(); i++)
+	{
+		Data << i << ") " << randomArray1[i] << "\n";
 
+	}
 
 	//measuring creation time of skip list
 	auto createskipliststart = std::chrono::high_resolution_clock::now();
@@ -150,8 +160,12 @@ int main()
 		"\nself sorting list:\t" << createselfsortduration.count();
 
 
-		Results.close();
+	Results.close();
 
-		Measure(randomArray1, skp, sfl);
+	Measure(randomArray1, skp, sfl);
+
+
+
+	
 
 }

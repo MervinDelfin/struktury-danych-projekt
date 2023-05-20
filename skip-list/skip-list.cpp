@@ -1,6 +1,8 @@
 #include <iostream>
 #include "skip-list.h"
 #include <vector>
+#include<fstream>
+
 
 using namespace std;
 
@@ -149,7 +151,6 @@ Node* SkipList::prevNode(int key) {
     return NULL;
 };
 
-
 void SkipList::displayList() {
     cout << "\n*****Skip List*****"
         << "\n";
@@ -164,6 +165,25 @@ void SkipList::displayList() {
         }
         cout << "\n";
     }
+};
+
+void SkipList::saveList(std::string file)
+{
+    std::ofstream Save(file + ".txt");
+    Save << "\n*****Skip List*****"
+        << "\n";
+    for (int i = 0; i <= level; i++)
+    {
+        Node* node = header->forward[i];
+        Save << "Level " << i << ": ";
+        while (node != NULL)
+        {
+            Save << node->key << " ";
+            node = node->forward[i];
+        }
+        Save << "\n";
+    }
+    Save.close();
 };
 
 //int main() {

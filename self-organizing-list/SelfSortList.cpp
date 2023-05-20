@@ -1,5 +1,5 @@
 #include "SelfSortList.h"
-
+#include<fstream>
 
 SelfSortList::SelfSortList()
 {
@@ -85,8 +85,30 @@ void SelfSortList::Print()
 
         temp = temp->next;
     }
-    std::cout << std::endl
-        << std::endl;
+    std::cout << std::endl<< std::endl;
+}
+
+void SelfSortList::SaveToFile(std::string file)
+{
+    std::ofstream Save(file + ".txt");
+    if (head == nullptr) {
+        Save << "List is empty" << "\n";
+        return;
+    }
+
+    Snode* temp = head;
+    Save << "List: ";
+    int i = 0;
+    while (temp != nullptr) {
+        Save << i<<") " << temp->val << "(" << temp->count << ")";
+        if (temp->next != nullptr)
+            Save << " \n ";
+
+        temp = temp->next;
+        i++;
+    }
+    Save << "\n" << "\n";
+    Save.close();
 }
 
 void SelfSortList::Remove(int key)

@@ -28,6 +28,7 @@ public:
     bool insertElement(int); // key
     bool deleteElement(int); // key
     void displayList();
+    void saveList(std::string);
     Node* searchElement(int); // key
     Node* nextNode(int); // key
     Node* prevNode(int); // key
