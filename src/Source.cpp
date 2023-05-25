@@ -85,30 +85,29 @@ void Measure(vector<int> randomArray, SkipList skp, SelfSortList sfl)
 
 	Results.open("measurement_results.txt", std::ios_base::app);
 	Results << "\n\n\n##############################" << randomArray.size() << " ELEMENTOW" << "\n================== czasy dodawania elementow\nskiplista:\t"
-		<< createSkpDuration.count() << "\nself sorting list:\t" << createSflDuration.count() << "\n=================== czasy wyszukiwania elementow\nskiplista:\n";
+		<< createSkpDuration.count() << "\nself sorting list:\t" << createSflDuration.count();
+	
+	Results.close();
+
+	Results.open("measurement_results_wyszukiwanie.txt", std::ios_base::app);
+
+	Results << "Wartosc elementu\tCzas skip lista\tCzas self sorting lista\n";
+
 	for (int i = 0; i < searchSkipArray.size(); i++)
 	{
-		Results << randomArray[i * randomArray.size() / 50] <<"):\t" << searchSkipArray[i].count()<<"\n";
-
-	}
-	Results << "self sorting lista:\n";
-	for (int i = 0; i < searchSkipArray.size(); i++)
-	{
-		Results << randomArray[i * randomArray.size() / 50] << "):\t" << searchSflArray[i].count() << "\n";
+		Results << randomArray[i * randomArray.size() / 50] <<"\t" << searchSkipArray[i].count()<< "\t" << searchSflArray[i].count() << "\n";
 
 	}
 
-	Results << "=============czas usuwania elementow\nskiplista:\n";
+	Results.close();
+
+	Results.open("measurement_results_usuwanie.txt", std::ios_base::app);
+	
+	Results << "Wartosc elementu\tCzas skip lista\tCzas self sorting lista\n";
+
 	for (int i = 0; i < skpDeleteTime.size(); i++)
 	{
-		Results << randomArray[i * randomArray.size() / 50] << "):\t" << skpDeleteTime[i].count() << "\n";
-
-	}
-
-	Results << "self sorting lista:\n";
-	for (int i = 0; i < sflDeleteTime.size(); i++)
-	{
-		Results << randomArray[i * randomArray.size() / 50] << "):\t" << sflDeleteTime[i].count() << "\n";
+		Results << randomArray[i * randomArray.size() / 50] << "\t" << skpDeleteTime[i].count() << "\t" << sflDeleteTime[i].count() << "\n";
 
 	}
 
