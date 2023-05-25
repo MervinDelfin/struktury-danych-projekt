@@ -7,7 +7,7 @@
 using namespace std;
 
 
-Node::Node(int key=0, int level=0) {
+Node::Node(int key, int level) {
     this->key = key;
     forward = new Node * [level + 1];
     memset(forward, 0, sizeof(Node*) * (level + 1));
