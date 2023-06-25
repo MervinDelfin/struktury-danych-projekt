@@ -1,8 +1,7 @@
 #include <iostream>
 
-#include "Source.h"
-#include "Djikstra.h"
-
+#include "SkipGraph.h"
+//#include ".\skip-list\skip-list.h"
 //int main(int argc, char *argv[])
 //{
 //    
@@ -60,44 +59,26 @@
 //
 //}
 
-int main()
-{
-    SelfOrgList list;
+int main() {
+    SkipList skipList;
 
-    // Insert elements into the list
-    list.Insert(10);
-    list.Insert(20);
-    list.Insert(30);
-    list.Insert(40);
-    list.Insert(50);
+    skipList.insert(3);
+    skipList.insert(6);
+    skipList.insert(2);
+    skipList.insert(9);
+    skipList.insert(5);
+    skipList.insert(1);
 
-    // Search for an element (not in cache)
-    bool found = list.Search(30);
-    if (found)
-        std::cout << "Element 30 found." << std::endl;
-    else
-        std::cout << "Element 30 not found." << std::endl;
+    skipList.display();
 
-    // Print the list
-    list.Print();
+    std::cout << "Search for key 5: " << (skipList.search(5) ? "Found" : "Not Found") << std::endl;
 
-    // Search for an element (in cache)
-    found = list.Search(20);
-    if (found)
-        std::cout << "Element 20 found." << std::endl;
-    else
-        std::cout << "Element 20 not found." << std::endl;
+    skipList.remove(5);
 
-    // Print the list
-    list.Print();
+    skipList.display();
 
-    // Remove an element
-    list.Remove(40);
-
-    // Print the list
-    list.Print();
+    std::cout << "Search for key 5: " << (skipList.search(5) ? "Found" : "Not Found") << std::endl;
 
     return 0;
 }
-
 
