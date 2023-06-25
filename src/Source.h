@@ -8,8 +8,8 @@
 
 
 #include "./skip-list/skip-list.h"
-#include "./self-organizing-list/SelfSortList.h"
+#include "./self-organizing-list/SelfOrgList.h"
 
 using std::vector;
-void SaveData(SkipList skp, SelfSortList sfl);
-void Measure(vector<int> randomArray, SkipList skp, SelfSortList sfl);
+void SaveData(SkipList skp, SelfOrgList sfl);
+void Measure(vector<int> randomArray, SkipList skp, SelfOrgList sfl);

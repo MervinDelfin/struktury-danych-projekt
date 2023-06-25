@@ -9,7 +9,7 @@ class Node {
 public:
     int key;
 
-    Node **forward;
+    Node** forward;
     Node(int, int); // key, level
 
     friend ostream& operator<<(ostream& os, const Node& node);
@@ -20,7 +20,7 @@ class SkipList {
     int MAXLVL;
     int level;
     float P; // fraction of nodes compered to the previous level
-    Node *header;
+    Node* header;
 
 public:
     SkipList(int, float); // MAXLVL, P
