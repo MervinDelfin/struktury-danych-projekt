@@ -505,3 +505,5 @@ FodyWeavers.xsd
 Info.plist
 
 *.dSYM
+
+*.txt

@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 	//measuring creation time of skip list
 	auto createskipliststart = std::chrono::high_resolution_clock::now();
-	SkipList skp(4,0.5);
+	SkipList skp(100,0.5);
 	auto createskipliststop = std::chrono::high_resolution_clock::now();
 	auto createskiplistduration = std::chrono::duration_cast<std::chrono::microseconds>(createskipliststop - createskipliststart);
 	
@@ -51,11 +51,18 @@ int main(int argc, char *argv[])
 
 	Results.close();
 
-	Measure(randomArray1, skp, sfl);
 
 
+	// Measure(randomArray3, skp, sfl);
 
-	
+
+	// skiplist<int> skplib;
+	// MeasureSkipList(randomArray3, skp, skplib);
+
+	node *sfllib = new node;
+	sfllib = NULL;
+
+	MeasureSelfOrg(randomArray3, sfl, sfllib);
 
 }
 

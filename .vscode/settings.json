@@ -70,7 +70,10 @@
     "chrono": "cpp",
     "compare": "cpp",
     "concepts": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "set": "cpp",
+    "numeric": "cpp",
+    "random": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",
